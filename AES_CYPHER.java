@@ -14,6 +14,7 @@ import java.io.IOException;
 public class AES_CYPHER {
     
     // initializing keys and formats
+
     private static final String encryptionKey = "RANDOMKEY1234567";
     private static final String characterEncoding = "UTF-8";
     private static final String cipherTransformation = "AES/CBC/PKCS5PADDING";
@@ -21,6 +22,7 @@ public class AES_CYPHER {
     
     
     // encryption library function
+
     public static String encrypt(String plainText) {
         String encryptedText = "";
         try {
@@ -41,6 +43,7 @@ public class AES_CYPHER {
 
     
     // decryption library function
+
     public static String decrypt(String encryptedText) {
         String decryptedText = "";
         try {
@@ -61,14 +64,19 @@ public class AES_CYPHER {
     
 
     // main 
+
     public static void main(String[] args) {
         
         String data = "";
 
-        // Reading plaintext file
+        // accessing arguments from commandline and taking it as a file
+
+        File file = new File(args[0]);
+
+        // Reading plaintext file from command line argument
+
         try {
-            File myObj = new File("plaintext.txt");
-            Scanner myReader = new Scanner(myObj);
+            Scanner myReader = new Scanner(file);
              while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
                 System.out.println(data);
@@ -79,7 +87,8 @@ public class AES_CYPHER {
                 e.printStackTrace();
         }
 
-        // Creating crypto.txt file
+        // Creating crypto.txt file ( in new system )
+
         try {
             File myObj = new File("crypto.txt");
             if (myObj.createNewFile()) {
@@ -92,7 +101,8 @@ public class AES_CYPHER {
             e.printStackTrace();
         }
 
-        // Creating cleartext.txt file
+        // Creating cleartext.txt file ( in new system )
+
         try {
             File myObj = new File("cleartext.txt");
             if (myObj.createNewFile()) {
@@ -106,6 +116,7 @@ public class AES_CYPHER {
         }
 
         // using the ecrypt decrypt functions
+
         String encyptedString   = encrypt(data);
         String decryptString  = decrypt(encyptedString);
         
@@ -114,6 +125,7 @@ public class AES_CYPHER {
         System.out.println("Decrypt String  : "+decryptString);
 
         // writing encrypted string in crypto.txt
+
         try {
             FileWriter myWriter = new FileWriter("crypto.txt");
             myWriter.write(encyptedString);
@@ -125,6 +137,7 @@ public class AES_CYPHER {
         }
 
         //writng decrypted string in cleartext.txt
+
         try {
             FileWriter myWriter = new FileWriter("cleartext.txt");
             myWriter.write(decryptString);
